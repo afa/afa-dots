@@ -1,0 +1,4 @@
+.*.swp
+.*.swo
+Gemfile.local
+Gemfile.local.lock

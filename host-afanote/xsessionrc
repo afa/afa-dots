@@ -1,0 +1,2 @@
+#!/bin/sh
+exec setxkbmap -option grp:switch,grp:shift_caps_toggle,grp_led:scroll us,ru

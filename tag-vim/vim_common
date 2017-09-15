@@ -1,8 +1,17 @@
 set nocompatible
 syntax on
+:colorscheme badwolf
 " set autoindent
 execute pathogen#infect()
 filetype plugin indent on
+" :colorscheme desert
+
+call plug#begin()
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+call plug#end()
+
+set rtp^=~/.fzf/plugin/fzf.vim
+" runtime fzf.vim
 
 let g:ctrlp_max_files=50000
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
@@ -12,13 +21,13 @@ map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
 
-:colorscheme badwolf
-runtime macros/matchit.vim
-
 set laststatus=2
 set ruler
 set colorcolumn=+1
 set textwidth=111
+set tb=
+
+runtime macros/matchit.vim
 
 set showbreak=¬
 set winheight=999
@@ -32,34 +41,42 @@ noremap <C-K> :bprev<CR>
 noremap <C-L> :tabn<CR>
 noremap <C-H> :tabp<CR>
 
-noremap <C-Y> :NERDTreeToggle<CR>
-noremap <Leader>n :noh<CR>
-nnoremap ff :Ag<SPACE>
-
-let g:reek_always_show = 0
-let g:reek_on_loading = 0
-
 " use * to search current word in normal mode
 nmap * <Plug>AgActionWord
 " " use * to search selected text in visual mode
 vmap * <Plug>AgActionVisual
 
-let g:templates_no_builtin_templates = 1
-let g:templates_directory = []
-noremap <Leader>h :TemplateHere model<CR>
+noremap <C-Y> :NERDTreeToggle<CR>
+noremap <Leader>n :noh<CR>
+nnoremap ff :Ag<SPACE>
+
+nnoremap <leader>/ :CtrlPTag<cr>
+nnoremap <leader>. :tn<cr>
+nnoremap <leader>, :tp<cr>
+
+let g:reek_always_show = 0
+let g:reek_on_loading = 0
+
+let g:jsx_ext_required = 0
+
+" let g:syntastic_ruby_checkers = ['rubocop', 'reek', 'mri']
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_ruby_checkers = ['rubocop', 'mri']
+let g:syntastic_aggregate_errors = 1
+let g:syntastic_ruby_reek_exec = 'bundle exec reek'
+let g:syntastic_ruby_rubocop_exec      = '/home/afa/.rbenv/shims/rubocop'
+" let g:syntastic_ruby_rubocop_exec = 'bundle exec rubocop'
 
 let g:startify_list_order = ['sessions', 'files', 'dir', 'bookmarks']
 let g:startify_session_persistence = 1
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 
-let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
+autocmd User Startified setlocal buftype=
 
-let g:jsx_ext_required = 0
+" let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 
 " let g:templates_no_builtin_templates = 1
 " let g:templates_directory = []
 " noremap <Leader>h :TemplateHere model<CR>
-
-autocmd User Startified setlocal buftype=
 
 nmap <F8> :TagbarToggle<CR>

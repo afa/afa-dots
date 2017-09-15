@@ -1,0 +1,65 @@
+set nocompatible
+syntax on
+" set autoindent
+execute pathogen#infect()
+filetype plugin indent on
+
+let g:ctrlp_max_files=50000
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+
+map <Leader>t :call RunCurrentSpecFile()<CR>
+map <Leader>s :call RunNearestSpec()<CR>
+map <Leader>l :call RunLastSpec()<CR>
+map <Leader>a :call RunAllSpecs()<CR>
+
+:colorscheme badwolf
+runtime macros/matchit.vim
+
+set laststatus=2
+set ruler
+set colorcolumn=+1
+set textwidth=111
+
+set showbreak=¬
+set winheight=999
+set winminheight=0
+
+" https://github.com/fholgado/minibufexpl.vim.git
+
+" test for usability
+noremap <C-J> :bnext<CR>
+noremap <C-K> :bprev<CR>
+noremap <C-L> :tabn<CR>
+noremap <C-H> :tabp<CR>
+
+noremap <C-Y> :NERDTreeToggle<CR>
+noremap <Leader>n :noh<CR>
+nnoremap ff :Ag<SPACE>
+
+let g:reek_always_show = 0
+let g:reek_on_loading = 0
+
+" use * to search current word in normal mode
+nmap * <Plug>AgActionWord
+" " use * to search selected text in visual mode
+vmap * <Plug>AgActionVisual
+
+let g:templates_no_builtin_templates = 1
+let g:templates_directory = []
+noremap <Leader>h :TemplateHere model<CR>
+
+let g:startify_list_order = ['sessions', 'files', 'dir', 'bookmarks']
+let g:startify_session_persistence = 1
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+
+let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
+
+let g:jsx_ext_required = 0
+
+" let g:templates_no_builtin_templates = 1
+" let g:templates_directory = []
+" noremap <Leader>h :TemplateHere model<CR>
+
+autocmd User Startified setlocal buftype=
+
+nmap <F8> :TagbarToggle<CR>
